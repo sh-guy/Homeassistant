@@ -440,7 +440,7 @@ Remove the manual mode setting from the window open automation when the window i
 alias: ViCare - Window Open Room 1
 description: ""
 triggers:
-  - type: opened
+  - type: not_opened
     device_id: WINDOW_SENSOR_DEVICE
     entity_id: WINDOW_OPENED_SENSOR
     domain: binary_sensor
