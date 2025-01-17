@@ -25,7 +25,7 @@ You will also need the following HA components: uptime integration
 ```
 #!/bin/bash
 
-# get ViCare Account username from secrects.yaml
+# get ViCare Account username from secrets.yaml
 VICARE_EMAIL=`grep -Ev "^#|^$" /config/secrets.yaml | awk -F':' '{if ( $1 == "vicare_email" ) {print substr($2,3,length($2)-3)}}'`
 # get ViCare Account password from secrets.yaml
 VICARE_PASSWORD=`grep -Ev "^#|^$" /config/secrets.yaml | awk -F':' '{if ( $1 == "vicare_password" ) {print substr($2,3,length($2)-3)}}'`
