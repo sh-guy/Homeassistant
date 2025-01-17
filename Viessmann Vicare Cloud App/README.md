@@ -451,7 +451,7 @@ triggers:
       seconds: 5
 conditions: []
 actions:
-  - alias: Activate Manual Quickmode
+  - alias: Deactivate Manual Quickmode
     action: rest_command.vicare_api_post
     data:
       url: >-
