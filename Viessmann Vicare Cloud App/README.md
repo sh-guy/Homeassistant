@@ -407,6 +407,8 @@ In order to capture your room numbers and zigbee IDs you have two options. Eithe
 Here is an example of changing the target temperature of a room when a window sensor triggers:
 
 Set target temperature to 8° for 30 minutes (default is 2 hours, I wanted it to go back to normal after 30 minutes in case HA missed the window closing again) when window opens for 5 seconds
+
+Change ROOM_NUMBER to match your configuration.
 ```
 alias: ViCare - Window Open Room 1
 description: ""
@@ -429,7 +431,7 @@ actions:
         https://api.viessmann.com/iot/v2/features/installations/{{
         state_attr('sensor.vicare_tokens','install_id') | int(0) }}/gateways/{{
         state_attr('sensor.vicare_tokens','gateway_id') | int(0)
-        }}/devices/RoomControl-1/features/rooms.0.quickmodes.manual/commands/activate
+        }}/devices/RoomControl-1/features/rooms.ROOM_NUMBER.quickmodes.manual/commands/activate
       payload: "{\"duration\":30,\"temperature\":8}"
     response_variable: response
 mode: single
@@ -458,7 +460,7 @@ actions:
         https://api.viessmann.com/iot/v2/features/installations/{{
         state_attr('sensor.vicare_tokens','install_id') | int(0) }}/gateways/{{
         state_attr('sensor.vicare_tokens','gateway_id') | int(0)
-        }}/devices/RoomControl-1/features/rooms.0.quickmodes.manual/commands/deactivate
+        }}/devices/RoomControl-1/features/rooms.ROOM_NUMBER.quickmodes.manual/commands/deactivate
       payload: "{}"
     response_variable: response
 mode: single
