@@ -1,7 +1,7 @@
 # Homeassistant Snippits
 Just some Home Assistant related stuff I wanted to archive.
 
-- Viessmann ViCare
+- Viessmann ViCare Cloud
 
   My implementation of the ViCare Cloud by emulating the ViCare App connectivity.
 
