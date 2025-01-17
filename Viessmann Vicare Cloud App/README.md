@@ -169,9 +169,9 @@ template:
 ```
 This is a template sensor that updates its attributes on three different triggers:
 
-1. On HA startthe initial access_token, refresh_token and id_token are stored.
-2. Every 45 minutes (although I think time_pattern here and think this actually updates at x:45 of every hour) update the access_token using the refresh_token.
-3. After HA has started and has an uptime of one minute, then use the stored access_token retrieved during restart to get the installation and gateway IDs for the relevant ViCare Account. (My implementation only support one installation gateway. So if you have multiple then you will need to modify my scripts to capture the status of more than one installation. For the typical consumer, you will probably only have one installation.)
+1. On HA start the initial access_token, refresh_token and id_token are stored.
+2. Every 45 minutes (although I think my time_pattern here actually updates at x:45 of every hour instead of every 45 minutes) update the access_token using the refresh_token.
+3. After HA has started and has an uptime of one minute, then use the stored access_token retrieved during restart to get the installation and gateway IDs for the relevant ViCare Account. (My implementation only supports one installation gateway. So if you have multiple then you will need to modify my scripts to capture the status of more than one installation. For the typical consumer, you will probably only have one installation.)
 
 You may have noticed that the 3rd trigger utilizes the vicare_api_get command from above. This is a generic GET request where you can provde any URL and Payload of the ViCare API. We will also be using the vicare_api_post command to access the primary URL to get all installation data needed in one request. More about that in the next step.
 
