@@ -401,12 +401,12 @@ You will also notice that value based "sensor" and "binary_sensor entities are c
 
 
 ```
-In order to capture your room numbers and zigbee IDs you have two options. Either use the above mentioned REST command and scan through the response. Or you can technically also just use the ViCare App to capture this. For the latter you can go into settings the app. The Serial Number of the TRVs and Climate Sensors is identical to the Zigbee ID. Just remove all "-" (dashes) and lower case the letters. For the room numbers it will be a little trial and error. Unfortunately, the display order in the app is not the same as the numbering from the API. So, if you have 3 rooms, you will have the room number 0, 1 and 2. You could create your sensors, picking one of the available rooms and just change the room numbers in your configuration after you figured out what room number applies to which devices. Using the cloud request results you would search for your room names and find the correlating "rooms.X" value.
+In order to capture your room numbers and zigbee IDs you have two options. Either use the above mentioned REST command and scan through the response. Or you can technically also just use the ViCare App to capture this. For the latter you can go into settings the app. The Serial Number of the TRVs and Climate Sensors is identical to the Zigbee ID. Just remove all "-" (dashes) and lower case the letters. For the room numbers it will be a little trial and error. Unfortunately, the display order in the app is not the same as the numbering from the API. So, if you have 3 rooms, you will have the room numbers 0, 1 and 2. You could create your sensors, picking one of the available rooms and just change the room numbers in your configuration after you figured out what room number applies to which devices. Using the cloud request results you would search for your room names and find the correlating "rooms.X" value.
 
 ## Step 5: Creating automation actions.
 Here is an example of changing the target temperature of a room when a window sensor triggers:
 
-Set target temperature to 8° for 30 minutes (default is 2 hours, I wanted it to go back to normal after 30 minutes in case HA missed the window closing again) when window opens for seconds
+Set target temperature to 8° for 30 minutes (default is 2 hours, I wanted it to go back to normal after 30 minutes in case HA missed the window closing again) when window opens for 5 seconds
 ```
 alias: ViCare - Window Open Room 1
 description: ""
