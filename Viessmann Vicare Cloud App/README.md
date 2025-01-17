@@ -1,5 +1,5 @@
 # Installation Guide
-Step for step guide to retrieve Vicare Cloud sensor data into Homeassistant the same way the ViCare App access this data in your account.
+Step for step guide to retrieve Vicare Cloud sensor data into Homeassistant the same way the ViCare App accesses this data in your account.
 
 ## Step 1: Add your ViCare Email address and password to your secrets.yaml file.
 First off create or edit your Homeassistant secrets.yaml file in your HA configuration folder. Add the following lines to the secrets file:
@@ -7,17 +7,15 @@ First off create or edit your Homeassistant secrets.yaml file in your HA configu
 vicare_email: "YOUR_VICARE_ACCOUNT_EMAIL"
 vicare_password: "YOUR_VICARE_ACCOUNT_PASSWORD"
 ```
-Replace the placeholders with your account specific information. Keep the quotes since my autentication script parses the data between the quotation marks. There's probably a better way to do it. ;-)
+Replace the placeholders with your account specific information. Keep the quotes since my authentication script parses the data between the quotation marks. There's probably a better way to do it. ;-)
 ## Step 2: Create Script and Rest Commands to authenticate with the ViCare Cloud API.
 Authentication to the ViCare Cloud utilizes OAUTH with PKCE. That means in order to access the API you must first generate a so-called Bearer Authentication token prior to accessing the API. I won't go into the details. But, basically this is a two-request process to generate the necessary tokens. To reduce the amount of usage of your ViCare account credential, Viessmann supplies refresh tokens with the original authentication token. This allows us to refresh the authentication token without using your credentials again and again.
 
-Currently, the Viessmann API grants access tokens for one hour and the refresh token for 180 days. So, this means techically your credentials are only nedded twice a year to get new refresh tokens. Currently my implementation only renews the refresh token when HA starts. So, as long as you never have an uptime for you HA longer than 180 days, you should be good. Otherwise, we should figured out a better way to renew refresh tokens without requiring a restart of your HA instance. In my case I don't think I ever run my HA without any changes that require a restart. ;-)
+Currently, the Viessmann API grants access tokens for one hour and the refresh token for 180 days. So, this means techically your credentials are only needed twice a year to get new refresh tokens. Currently my implementation only renews the refresh token when HA starts. So, as long as you never have an uptime for you HA longer than 180 days, you should be good. Otherwise, we should figured out a better way to renew refresh tokens without requiring a restart of your HA instance. In my case I don't think I ever run my HA longer than 180 days without any changes that require a restart. ;-)
 
 Since the initial creation of access tokens including refresh tokens is a two-step process, I utilize a shell script to create the tokens and populate a sensor with attributes that can be used by other REST Commands to access the API as well as updating the access token every hour using the stored refresh token.
 
-TLDR; Let's get on with this!
-
-Create a shell script somewhere within your configuration directory or subdirectory thereof and populate it with the following code. My implementation assumes your ViCare email and password are stored as above in your secrects.yaml and that this script is under your HA configuration/scripts directory. If you use a different directory structure, you will need to modify some parts of the following steps.
+Create a shell script somewhere within your configuration directory or subdirectory thereof and populate it with the following code. My implementation assumes your ViCare email and password are stored as above in your secrets.yaml and that this script is under your HA configuration/scripts directory. If you use a different directory structure, you will need to modify some parts of the following steps.
 
 Requirements: make sure you can access the following commands on the cli of your HA instance: grep, awk, sha256sum, base64, curl. If these command are named differently or you use wget instead of curl, then you will need to modify the script accordingly.
 
