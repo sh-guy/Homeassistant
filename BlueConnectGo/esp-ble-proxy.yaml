@@ -101,16 +101,6 @@ switch:
   - platform: restart
     name: "${entityname} Restart"
     id: reset
-
-
-# Temperature Input
-one_wire:
-  - platform: gpio
-    pin:
-      number: GPIO02
-      mode:
-        input: true
-        pullup: true
  
 sensor:
   # WiFi Signal
@@ -126,36 +116,8 @@ sensor:
       - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
     unit_of_measurement: "%"
     entity_category: "diagnostic"
-  # Temperature Sensors
-  - platform: dallas_temp
-    address: 0xe33c69045786c028
-    name: "${entityname} Aussentemperatur"
-    unit_of_measurement: "°C"
-    icon: "mdi:thermometer-plus"
-    device_class: "temperature"
-    state_class: "measurement"
-    accuracy_decimals: 2
-    update_interval: 300s
-  - platform: dallas_temp
-    address: 0xda3ce60457aa1e28
-    name: "${entityname} Saunatemperatur"
-    unit_of_measurement: "°C"
-    icon: "mdi:thermometer-plus"
-    device_class: "temperature"
-    state_class: "measurement"
-    accuracy_decimals: 2
-    update_interval: 300s
-    filters:
-      - calibrate_linear:
-        - 8.8 -> 10.2
-        - 17.2 -> 20.5
-        - 52.0 -> 65.0
-    #  - quantile:
-    #    window_size: 7
-    #    send_every: 2
-    #    send_first_at: 1
-    #  - lambda: if (x < 3) return 0; else return x;
-# Blueriiot Blue Connect Go Sensor
+
+  # Blueriiot Blue Connect Go Sensor
   - platform: template
     id: binary_sensor_${blueriiot_id_prefix}_connected
     name: ${blueriiot_name_prefix} Status
@@ -194,22 +156,22 @@ sensor:
     device_class: "battery"
     state_class: "measurement"
     accuracy_decimals: 1
-  - platform: template 
-    id: sensor_${blueriiot_id_prefix}_salt
-    name: ${blueriiot_name_prefix} Salt
+#  - platform: template 
+#    id: sensor_${blueriiot_id_prefix}_salt
+#    name: ${blueriiot_name_prefix} Salt
     # Optional variables:
-    unit_of_measurement: "g/L"
-    icon: "mdi:water-percent"
-    state_class: "measurement"
-    accuracy_decimals: 1
-  - platform: template 
-    id: sensor_${blueriiot_id_prefix}_cond
-    name: ${blueriiot_name_prefix} Conductivity
+#    unit_of_measurement: "g/L"
+#    icon: "mdi:water-percent"
+#    state_class: "measurement"
+#    accuracy_decimals: 1
+#  - platform: template 
+#    id: sensor_${blueriiot_id_prefix}_cond
+#    name: ${blueriiot_name_prefix} Conductivity
     # Optional variables:
-    unit_of_measurement: "mS/cm"
+#    unit_of_measurement: "mS/cm"
     #icon: "mdi:water-percent"
-    state_class: "measurement"
-    accuracy_decimals: 1
+#    state_class: "measurement"
+#    accuracy_decimals: 1
 
 ## Blue Connect
 button:
