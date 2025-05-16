@@ -2,6 +2,7 @@
 Just some Home Assistant related stuff I wanted to archive.
 
 - BlueConnect Go
+
   I have a BlueConnect Go in my Hot tub to measure water temperature, pH and ORP. There are two versions of this pool sensor - Go and Plus. Both are practically the same, except the Plus has an edditional Conductivity sensor that is also used to calculate salt level. So, the Plus is only really necessary if Salt is used for water desinfection. Also, the Plus is typically sold in a bundle with the Bluetooth to WiFi Gateway and the BlueRiiot subscription.
   This BlueRiiot subscription allows for automatic measurement updates to the cloud.
   I decided to use an ESP32 developer board as a Bluetooth to WiFi gateway into HA. There is a BlueConnect integration that would capture the BLE messages sent via a BLE Proxy. But, I decided to process the BLE messages locally on the ESP32 board and just integrate it via ESPHOME into HA. 
